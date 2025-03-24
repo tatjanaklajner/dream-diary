@@ -1,0 +1,71 @@
+/* General container for the vividness chart */
+.vividness-chart-container {
+  background-color: var(
+    --background
+  ); /* Ensure background is using your app's main background */
+  border-radius: 8px;
+  box-shadow: var(--shadow-light); /* Light shadow for the chart */
+  padding: 2rem;
+  margin: 2rem auto;
+}
+
+/* Recharts Surface */
+.recharts-surface {
+  background-color: var(
+    --background
+  ); /* Match chart surface background with app background */
+  border-radius: 12px;
+}
+
+/* Axis ticks */
+.recharts-cartesian-axis-tick {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  color: var(--foreground); /* Axis tick color matching the text */
+}
+
+/* Tooltip Styling */
+.recharts-tooltip {
+  background-color: var(--secondary-blue); /* Light blue tooltip background */
+  color: var(--button-text);
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-family: var(--font-primary);
+}
+
+/* Tooltip item styling */
+.recharts-tooltip-item {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+}
+
+/* Legend item styling */
+.recharts-legend-item-text {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  color: var(--foreground); /* Legend text color matches the text */
+}
+
+/* Legend wrapper spacing */
+.recharts-legend-wrapper {
+  margin-top: 1rem;
+}
+
+/* Legend item padding */
+.recharts-legend-item {
+  padding: 8px;
+}
+
+/* Container for the sleep quality chart (if applicable) */
+.sleep-quality-chart-container {
+  background-color: var(
+    --background
+  ); /* Set background color from your app theme */
+  border-radius: 8px;
+  box-shadow: var(--shadow-light);
+  padding: 2rem;
+  margin: 2rem auto;
+  width: 100%; /* Full width */
+  height: 400px; /* Fixed height */
+}

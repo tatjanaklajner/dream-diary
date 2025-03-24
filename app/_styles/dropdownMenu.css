@@ -1,0 +1,22 @@
+/* Dropdown transition effect */
+button:hover + .absolute {
+  display: block; /* Ensure that the dropdown shows on hover */
+}
+
+.absolute {
+  display: none; /* Initially hidden */
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: var(--shadow-heavy);
+  width: 150px;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+/* Dropdown button spacing */
+button + button {
+  margin-top: 8px; /* Adds space between the buttons */
+}
