@@ -37,8 +37,10 @@ export default function TypeChart({ dreams }) {
   });
 
   return (
-    <div className="dream-type-chart-container bg-white p-4 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-center mb-6">Dream Types</h2>
+    <div className="dream-type-chart-container bg-white dark:bg-[#2d3748] p-4 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-semibold text-center mb-6 text-[var(--primary-blue)] dark:text-white">
+        Dream Types
+      </h2>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart data={dreamTypeCount}>
           <CartesianGrid strokeDasharray="3 3" />

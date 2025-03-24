@@ -40,8 +40,8 @@ export default function VividnessChart({ dreams }) {
   }));
 
   return (
-    <div className="vividness-chart-container bg-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold text-center mb-6 text-[var(--primary-blue)]">
+    <div className="vividness-chart-container bg-white dark:bg-[#2d3748] p-6 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-semibold text-center mb-6 text-[var(--primary-blue)] dark:text-white">
         Vividness of Dreams
       </h2>
       <ResponsiveContainer width="100%" height={400}>

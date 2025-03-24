@@ -70,28 +70,32 @@ function DreamForm({ dream, date, onClose }) {
   }
 
   return (
-    <div className="p-8 bg-white rounded-xl shadow-2xl max-w-xl mx-auto mt-8 border border-gray-300">
-      <h2 className="text-3xl font-semibold text-center text-[var(--primary-blue)] mb-8">
+    <div className="p-8 bg-white dark:bg-[#1f2937] rounded-xl shadow-2xl max-w-xl mx-auto mt-8 border border-gray-300 dark:border-gray-600">
+      <h2 className="text-3xl font-semibold text-center text-[var(--primary-blue)] dark:text-white mb-8">
         {dream ? "Update Your Dream" : "Create a Dream"}
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div className="flex flex-col gap-6">
-          <label className="text-lg font-semibold text-gray-700">Date</label>
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            Date
+          </label>
           <input
             type="date"
             {...register("date", { required: "Date is required" })}
-            className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           />
 
-          <label className="text-lg font-semibold text-gray-700">Title</label>
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+            Title
+          </label>
           <input
             type="text"
             {...register("title", { required: "Title is required" })}
-            className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           />
 
-          <label className="text-lg font-semibold text-gray-700">
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Description
           </label>
           <textarea
@@ -99,15 +103,15 @@ function DreamForm({ dream, date, onClose }) {
               required: "Description is required",
             })}
             rows="6"
-            className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           ></textarea>
 
-          <label className="text-lg font-semibold text-gray-700">
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             How was your sleep?
           </label>
           <select
             {...register("rating", { required: "Sleep rating is required" })}
-            className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           >
             <option value="">Select</option>
             <option value="terrible">Terrible</option>
@@ -117,7 +121,7 @@ function DreamForm({ dream, date, onClose }) {
             <option value="great">Great</option>
           </select>
 
-          <label className="text-lg font-semibold text-gray-700">
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             How vivid was your dream?
           </label>
           <input
@@ -127,10 +131,10 @@ function DreamForm({ dream, date, onClose }) {
             {...register("vividness", {
               required: "Vividness rating is required",
             })}
-            className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           />
 
-          <label className="text-lg font-semibold text-gray-700">
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Add an image (optional)
           </label>
           {image ? (
@@ -154,16 +158,16 @@ function DreamForm({ dream, date, onClose }) {
             <input
               type="file"
               onChange={(e) => setImage(e.target.files[0])}
-              className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+              className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
             />
           )}
 
-          <label className="text-lg font-semibold text-gray-700">
+          <label className="text-lg font-semibold text-gray-700 dark:text-gray-300">
             Dream Type
           </label>
           <select
             {...register("type", { required: "Dream type is required" })}
-            className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           >
             <option value="">Select</option>
             <option value="normal">Normal</option>
@@ -179,7 +183,7 @@ function DreamForm({ dream, date, onClose }) {
           <button
             type="submit"
             disabled={isPending}
-            className="py-3 px-8 rounded-lg bg-[var(--primary-blue)] text-white hover:bg-[var(--secondary-blue)] focus:outline-none transition duration-300"
+            className="py-3 px-8 rounded-lg bg-[var(--primary-blue)] text-white hover:bg-[var(--secondary-blue)] focus:outline-none transition duration-300 disabled:bg-gray-400 dark:disabled:bg-gray-700"
           >
             {isPending ? "Submitting..." : dream ? "Update Dream" : "Submit"}
           </button>

@@ -37,7 +37,7 @@ function DreamItem({ dream, onDelete, onUpdate }) {
   const formattedDate = date ? new Date(date).toLocaleDateString("en-GB") : "";
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200 mb-6 flex hover:shadow-lg transition-shadow duration-300">
+    <div className="bg-white dark:bg-[#1f2937] p-6 rounded-xl shadow-md border border-gray-200 dark:border-gray-700 mb-6 flex hover:shadow-lg dark:hover:shadow-lg transition-shadow duration-300">
       {image && (
         <img
           src={image}
@@ -58,29 +58,31 @@ function DreamItem({ dream, onDelete, onUpdate }) {
 
           {!editMode && (
             <>
-              <h3 className="text-gray-800 text-xl font-semibold mb-2">
+              <h3 className="text-gray-800 dark:text-gray-100 text-xl font-semibold mb-2">
                 {title}
               </h3>
 
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 dark:text-gray-300 mb-4">
                 {description.length > 100
                   ? description.substring(0, 100) + "..."
                   : description}
               </p>
 
               {formattedDate && (
-                <p className="text-gray-500 text-sm mb-4">{formattedDate}</p>
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
+                  {formattedDate}
+                </p>
               )}
 
               <button
                 onClick={toggleMenu}
-                className="absolute top-2 right-2 text-gray-600 hover:text-gray-800 transition-colors"
+                className="absolute top-2 right-2 text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors"
               >
                 <FaEllipsisV />
               </button>
 
               {activeMenu === id && (
-                <div className="menu-{id} absolute top-8 right-0 mt-2 bg-white p-3 rounded-lg shadow-lg w-48 z-10 border border-gray-200">
+                <div className="menu-{id} absolute top-8 right-0 mt-2 bg-white dark:bg-[#374151] p-3 rounded-lg shadow-lg w-48 z-10 border border-gray-200 dark:border-gray-700">
                   <Link
                     href={`/account/dreams/${id}`}
                     className="inline-block px-4 py-2 bg-[#1e3a8a] text-white text-lg font-semibold rounded-lg shadow-lg transform transition-all duration-300 hover:bg-[#1d4ed8] hover:text-white hover:scale-105 hover:shadow-2xl focus:outline-none mb-2 w-full"

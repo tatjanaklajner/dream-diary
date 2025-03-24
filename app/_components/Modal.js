@@ -18,16 +18,16 @@ function Modal({ isOpen, onClose, children }) {
 
   return (
     <div
-      className="fixed inset-0 backdrop-blur-lg flex justify-center items-center z-50 transition-opacity duration-300 ease-in-out"
+      className="fixed inset-0 backdrop-blur-lg flex justify-center items-center z-50 transition-opacity duration-300 ease-in-out bg-gray-500 bg-opacity-50 dark:bg-gray-900 dark:bg-opacity-80"
       style={{ animation: "fadeIn 0.3s ease-in-out" }}
     >
       <div
-        className="bg-white p-8 rounded-3xl shadow-xl max-w-4xl sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5 h-[90vh] overflow-hidden transform transition-all duration-300 ease-in-out"
+        className="bg-white p-8 rounded-3xl shadow-xl max-w-4xl sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-2/5 h-[90vh] overflow-hidden transform transition-all duration-300 ease-in-out dark:bg-[#2d3748] dark:text-white"
         style={{ animation: "slideUp 0.3s ease-out" }}
       >
         <button
           onClick={onClose}
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none"
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 focus:outline-none dark:text-gray-300 dark:hover:text-gray-100"
           aria-label="Close Modal"
         >
           <svg
@@ -46,7 +46,7 @@ function Modal({ isOpen, onClose, children }) {
           </svg>
         </button>
 
-        <div className="max-h-[calc(90vh-3rem)] overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+        <div className="max-h-[calc(90vh-3rem)] overflow-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100 dark:scrollbar-thumb-gray-600 dark:scrollbar-track-gray-800">
           {children}
         </div>
       </div>

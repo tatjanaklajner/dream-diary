@@ -42,8 +42,8 @@ export default function RatingChart({ dreams }) {
   const filteredData = sleepQualityCount.filter((item) => item.count > 0);
 
   return (
-    <div className="sleep-quality-chart-container bg-white p-4 rounded-lg shadow-lg w-full h-full">
-      <h2 className="text-2xl font-semibold text-center mb-6">
+    <div className="sleep-quality-chart-container bg-white dark:bg-[#2d3748] p-4 rounded-lg shadow-lg w-full h-full">
+      <h2 className="text-2xl font-semibold text-center mb-6 text-[var(--primary-blue)] dark:text-white">
         Sleep Quality Distribution
       </h2>
       <ResponsiveContainer width="100%" height={300}>
