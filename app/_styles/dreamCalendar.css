@@ -12,6 +12,13 @@
   transition: all 0.3s ease; /* Smooth transition */
 }
 
+@media (prefers-color-scheme: dark) {
+  .dream-calendar {
+    background-color: #1f2937; /* Dark background for the calendar */
+    border: 1px solid #4b5563; /* Darker border */
+    color: #e5e7eb; /* Light text color for readability */
+  }
+}
 /* Header (Month navigation) */
 .dream-calendar__navigation button {
   background-color: transparent;
@@ -70,6 +77,15 @@
   color: white;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft glow effect */
+}
+
+@media (prefers-color-scheme: dark) {
+  .dream-calendar__tile--active {
+    background-color: #1f2937; /* Lighter blue */
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Border around the selected day in dark mode */
+  }
 }
 
 /* Days with dreams */

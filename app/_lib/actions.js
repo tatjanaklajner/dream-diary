@@ -129,44 +129,6 @@ export async function updateDream(dreamId, formData) {
   return { success: true };
 }
 
-async function onSubmit(data) {
-  const formData = new FormData();
-  Object.entries(data).forEach(([key, value]) => formData.append(key, value));
-  if (image) formData.append("image", image);
-
-  try {
-    toast.success(
-      dream ? "Dream updated successfully!" : "Dream created successfully!"
-    );
-
-    startTransition(true);
-
-    let response;
-    if (dream) {
-      response = await updateDream(dream.id, formData);
-    } else {
-      response = await createDream(formData);
-    }
-
-    if (response.success) {
-      reset();
-      setTimeout(() => {
-        onClose();
-        window.location.href = "/account/dreams";
-      }, 1000);
-    }
-  } catch (error) {
-    const errorMessage =
-      error?.response?.data?.message ||
-      error?.message ||
-      "Something went wrong. Please try again";
-
-    toast.error(errorMessage);
-  } finally {
-    startTransition(false);
-  }
-}
-
 export async function deleteDream(id) {
   const session = await auth();
   if (!session) throw new Error("You must be logged in");
@@ -180,10 +142,153 @@ export async function deleteDream(id) {
   revalidatePath("account/dreams");
 }
 
+export async function getMessage(messageId) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const { data, error } = await supabase
+    .from("messages")
+    .select("*")
+    .eq("id", messageId)
+    .single();
+
+  if (error) {
+    console.error(error);
+    notFound();
+  }
+
+  return data;
+}
+
+export async function getMessages(userId, role) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const { userId: loggedUserId } = session.user;
+
+  if (role === "admin") {
+    const { data, error } = await supabase
+      .from("messages")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data || [];
+  } else {
+    const { data, error } = await supabase
+      .from("messages")
+      .select("*")
+      .eq("user_id", loggedUserId)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error(error);
+      return [];
+    }
+
+    return data || [];
+  }
+}
+
+export async function createDreamInteraction(formData) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const { userId } = session.user;
+
+  const newMessage = {
+    user_id: userId,
+    dream: formData.get("dream"),
+    status: "delivered",
+  };
+
+  const { data, error } = await supabase.from("messages").insert([newMessage]);
+
+  if (error) {
+    console.error("Supabase error:", error.message);
+    throw new Error("Failed to submit dream interaction: " + error.message);
+  }
+
+  return { seccess: true };
+}
+
+export async function changeMessageStatus(messageId) {
+  try {
+    const { data, error } = await supabase
+      .from("messages")
+      .update({ status: "seen" })
+      .eq("id", messageId);
+
+    if (error) {
+      console.error("Error updating status:", error.message);
+      return { success: false, error: error.message };
+    }
+
+    console.log("Message status updated:", data);
+    return { success: true, data };
+  } catch (err) {
+    console.error("Error in changeMessageStatus:", err);
+    return { success: false, error: err.message };
+  }
+}
+
+export async function createAdminReply(formData, interactionId) {
+  const session = await auth();
+  if (!session) throw new Error("You must be logged in");
+
+  const { userId } = session.user;
+
+  const { data: user, error: roleError } = await supabase
+    .from("users")
+    .select("role")
+    .eq("id", userId)
+    .single();
+
+  if (roleError || user.role !== "admin") {
+    throw new Error("You must be an admin to reply.");
+  }
+
+  const newReply = {
+    interpretation: formData.get("interpretation"),
+    status: "interpreted",
+  };
+
+  const { error } = await supabase
+    .from("messages")
+    .update(newReply)
+    .eq("id", interactionId);
+
+  if (error) {
+    console.error("Error inserting admin reply:", error);
+    throw new Error("Failed to submit admin reply");
+  }
+
+  return { success: true };
+}
+
 export async function signInAction() {
   await signIn("google", { redirectTo: "/account/dreams" });
 }
 
 export async function signOutAction() {
   await signOut({ redirectTo: "/" });
+}
+
+export async function getUserById(userId) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("Error fetching user:", error);
+    return null;
+  }
+
+  return data;
 }

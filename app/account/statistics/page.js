@@ -35,9 +35,15 @@ export default async function Page() {
       {dreams && dreams.length > 0 ? (
         <>
           <Suspense fallback={<LoadingSpinner />}>
-            <RatingChart dreams={dreams} />
-            <TypeChart dreams={dreams} />
-            <VividnessChart dreams={dreams} />
+            <div style={{ marginBottom: "20px" }}>
+              <RatingChart dreams={dreams} />
+            </div>
+            <div style={{ marginBottom: "20px" }}>
+              <TypeChart dreams={dreams} />
+            </div>
+            <div>
+              <VividnessChart dreams={dreams} />
+            </div>
           </Suspense>
         </>
       ) : (
@@ -47,7 +53,7 @@ export default async function Page() {
             It looks like you haven&apos;t logged any dreams yet. Start by
             creating one!
           </p>
-          <CreateButton />
+          <CreateButton>Create dream</CreateButton>
         </div>
       )}
     </div>

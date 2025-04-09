@@ -4,6 +4,7 @@ import { auth } from "@/app/_lib/auth";
 import CreateButton from "@/app/_components/CreateButton";
 import { Suspense } from "react";
 import LoadingSpinner from "@/app/_components/LoadingSpinner";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const metadata = {
   title: "Dreams",
@@ -20,7 +21,7 @@ export default async function Page() {
 
   if (!dreams.length)
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen text-center bg-gradient-to-b from-blue-100 to-indigo-200">
+      <div className="flex flex-col items-center justify-center min-h-screen text-center">
         <h1 className="text-3xl font-semibold text-indigo-800 mb-4">
           Dream Big!
         </h1>
@@ -38,8 +39,10 @@ export default async function Page() {
       <Suspense fallback={<LoadingSpinner />}>
         <DreamList dreams={dreams} />
       </Suspense>
-      <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 mb-6">
-        <CreateButton>Add New Dream</CreateButton>
+      <div className="fixed bottom-6 right-6 mb-6">
+        <CreateButton className="w-12 h-12 rounded-full flex items-center justify-center bg-blue-500 text-white">
+          <PlusIcon className="w-6 h-6" />
+        </CreateButton>
       </div>
     </div>
   );

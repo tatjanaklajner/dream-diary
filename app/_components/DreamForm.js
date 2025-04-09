@@ -111,7 +111,7 @@ function DreamForm({ dream, date, onClose }) {
           </label>
           <select
             {...register("rating", { required: "Sleep rating is required" })}
-            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#374151] text-gray-900 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           >
             <option value="">Select</option>
             <option value="terrible">Terrible</option>
@@ -167,7 +167,7 @@ function DreamForm({ dream, date, onClose }) {
           </label>
           <select
             {...register("type", { required: "Dream type is required" })}
-            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
+            className="w-full p-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#374151] text-gray-900 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-blue)] dark:focus:ring-[var(--secondary-blue)] transition duration-300"
           >
             <option value="">Select</option>
             <option value="normal">Normal</option>

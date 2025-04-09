@@ -5,12 +5,15 @@ import Calendar from "react-calendar";
 import Modal from "./Modal";
 import DreamForm from "./DreamForm";
 import DreamItem from "./DreamItem";
+import { deleteDream } from "@/app/_lib/actions"; // Assuming deleteDream function is in utils/supabase.js
 import "@/app/_styles/dreamCalendar.css";
 
-function DreamCalendar({ dreams = [] }) {
+function DreamCalendar({ dreams: initialDreams = [] }) {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [modalOpen, setModalOpen] = useState(false);
   const [editingDream, setEditingDream] = useState(null);
+  const [activeMenuId, setActiveMenuId] = useState(null); // Added state for active menu
+  const [dreams, setDreams] = useState(initialDreams); // Manage dreams in the state
 
   const formatDate = (date) => {
     const year = date.getFullYear();
@@ -54,11 +57,31 @@ function DreamCalendar({ dreams = [] }) {
     setEditingDream(null);
   };
 
-  useEffect(() => {
-    if (modalOpen) {
-      setEditingDream(null);
+  // Delete the dream from both the backend (Supabase) and the state
+  const handleDeleteDream = async (id) => {
+    try {
+      // Call the deleteDream function to delete from Supabase
+      await deleteDream(id);
+
+      // After deletion, update the local state by filtering out the deleted dream
+      const updatedDreams = dreams.filter((dream) => dream.id !== id);
+      setDreams(updatedDreams);
+    } catch (error) {
+      console.error("Error deleting dream:", error);
     }
-  }, [selectedDate]);
+  };
+
+  // Close the menu if the user clicks outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (event.target.closest(".dream-calendar-wrapper") === null) {
+        setActiveMenuId(null); // Close the menu when clicking outside the calendar
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div className="dream-calendar-wrapper p-6 rounded-lg shadow-heavy">
@@ -87,16 +110,18 @@ function DreamCalendar({ dreams = [] }) {
             Your Dreams On This Day
           </h3>
           <div>
-            {dreamsForSelectedDate.map((dream, index) => (
+            {dreamsForSelectedDate.map((dream) => (
               <DreamItem
-                key={index}
+                key={dream.id}
                 dream={dream}
-                onDelete={(id) => console.log("Delete dream with ID:", id)}
+                onDelete={handleDeleteDream} // Pass handleDeleteDream function
                 onUpdate={(updatedDream) =>
                   console.log("Update dream", updatedDream)
                 }
                 onShowDetails={() => console.log("Show dream details")}
                 onEdit={() => handleEditDream(dream)}
+                activeMenuId={activeMenuId}
+                setActiveMenuId={setActiveMenuId} // Pass down activeMenuId and setActiveMenuId
               />
             ))}
           </div>

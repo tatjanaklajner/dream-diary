@@ -17,8 +17,14 @@ const authConfig = {
       try {
         const existingUser = await getUser(user.email);
 
+        const username = profile.name;
+
         if (!existingUser)
-          await createUser({ email: user.email, username: user.username });
+          await createUser({
+            email: user.email,
+            username,
+            role: "user",
+          });
 
         return true;
       } catch {
@@ -28,6 +34,7 @@ const authConfig = {
     async session({ session, user }) {
       const myUser = await getUser(session.user.email);
       session.user.userId = myUser.id;
+      session.user.role = myUser.role;
       return session;
     },
   },
