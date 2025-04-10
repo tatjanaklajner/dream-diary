@@ -123,10 +123,33 @@ const DreamSwiper = ({ user }) => {
             </div>
           </div>
         </SwiperSlide>
+        <SwiperSlide>
+          <div className="flex h-full min-h-screen">
+            <div className="w-1/2 p-12 flex items-center justify-center">
+              <div>
+                <h1 className="text-5xl font-semibold text-[#1e3a8a] mb-6">
+                  Understand the Meaning Within
+                </h1>
+                <p className="text-[#4b5563] text-lg mb-10">
+                  Every dream tells a story—about your fears, hopes, and
+                  desires. Discover deeper meaning through interpretation and
+                  unlock insights that guide your waking life.
+                </p>
+              </div>
+            </div>
+            <div className="w-1/2">
+              <img
+                src="/interpretation.jpg"
+                alt="Interpret Dreams"
+                className="w-full h-[90vh] object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </SwiperSlide>
       </Swiper>
 
       <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col items-center space-y-2">
-        {Array.from({ length: 4 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <div
             key={index}
             className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${

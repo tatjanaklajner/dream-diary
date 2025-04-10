@@ -10,7 +10,7 @@ export default async function Header() {
       <div className="container mx-auto flex justify-between items-center">
         <Link href={"/"} className="flex items-center space-x-3">
           <Image
-            src="/logo.jpg"
+            src="/logo.png"
             alt="Dream Diary Logo"
             width={40}
             height={40}
